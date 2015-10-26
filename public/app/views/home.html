@@ -1,0 +1,76 @@
+<style>
+  .home-content {
+    background-image: url({{backgroundImageUrl}});
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: 50% 50%;
+  }
+  .clothe-content {
+    background-image: url({{clotheImageUrl}});
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: 50% 50%;
+  }
+</style>
+
+<md-content layout-fill layout-wrap
+  layout="row" style="background-color:transparent;" flex>
+  <div class="home-content" flex="100" layout="row" layout-fill ng-style="{'height': viewportHeight + 'px'}">
+  </div>
+  <div flex="100" layout="row" layout-fill layout-align="center center"
+    ng-style="{'height': viewportHeight + 'px'}"
+    style="background-color:white;">
+    <md-button aria-label="Show Menu"
+      class="md-icon-button"
+      style=""
+      ng-click="" >
+      <md-icon md-svg-icon="navigation:ic_chevron_left_24px" style="color:#475159;"></md-icon>
+    </md-button>
+    <div layout="row" layout-align="start center" flex
+      ng-style="{'height': viewportHeight + 'px'}"
+      style="background-color:white;overflow:hidden;">
+      <div ng-repeat="item in items"
+        layout="column" layout-align="center center"
+        flex-sm="100" flex-md="50" flex-lg="33" flex-gt-lg="25">
+        <div style="background-color:white;">
+          <img ng-src="{{item.imageUrl}}" alt="Washed Out"
+            style="max-height:100%;max-width:100%;display:block;margin: 0 auto;">
+        </div>
+        <md-list>
+          <md-list-item class="md-3-line">
+            <div class="md-list-item-text" layout="column" style="margin-top:8px;margin-bottom:8px;">
+              <h3><b>{{item.name}}</b></h3>
+              <h4>{{item.price | currency:"IDR "}}</h4>
+            </div>
+          </md-list-item>
+        </md-list>
+      </div>
+    </div>
+    <md-button aria-label="Show Menu"
+      class="md-icon-button"
+      style=""
+      ng-click="">
+      <md-icon md-svg-icon="navigation:ic_chevron_right_24px" style="color:#475159;"></md-icon>
+    </md-button>
+  </div>
+  <div flex="100" layout="row"
+    layout-fill layout-wrap layout-align="center start"
+    style="background-color:#CCC9C0;"
+    ng-style="{'height': viewportHeight + 'px'}">
+
+  </div>
+</md-content>
+
+<div style="position:absolute;left:24px;top:4px;right:auto;bottom:auto;">
+  <h2 class="md-title"><span style="color:#475159;">NUMA</span></h2>
+</div>
+<md-button aria-label="Show Menu"
+  class="md-fab md-fab-top-right"
+  style="background-color:transparent;right:0px;top:0px;box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0);"
+  ng-click="" >
+  <md-icon md-svg-icon="navigation:ic_menu_24px" style="color:#475159;"></md-icon>
+</md-button>
