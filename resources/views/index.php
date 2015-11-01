@@ -16,9 +16,7 @@
     <script src="<?= asset('app/assets/vendor/angular-animate/angular-animate.min.js') ?>"></script>
     <script src="<?= asset('app/assets/vendor/angular-aria/angular-aria.min.js') ?>"></script>
     <script src="<?= asset('app/assets/vendor/angular-material/angular-material.min.js') ?>"></script>
-    <!-- <script src="<?= asset('app/assets/vendor/angular-skrollr/dist/angular-skrollr.min.js') ?>"></script>
-    <script src="<?= asset('app/assets/vendor/skrollr/dist/skrollr.min.js') ?>"></script> -->
-
+    
     <!-- AngularJS Application Scripts -->
     <script src="<?= asset('app/app.js') ?>"></script>
     <script src="<?= asset('app/routes.js') ?>"></script>

@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Product;
+use App\ProductType;
 
 class ProductController extends Controller
 {
@@ -22,17 +23,7 @@ class ProductController extends Controller
       } else {
         $products = Product::find($id);
       }
-      return $products->toJson();
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+      return $products;
     }
 
     /**
@@ -43,34 +34,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-      $product = Product::create([
-        'name' => $request->name,
-        'desc' => $request->desc,
-        'price' => $request->price
-      ]);
-      return $product;
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $product = new Product();
+        $product->name = $request->name;
+        $product->desc = $request->desc;
+        $product->productType()->associate(
+            ProductType::find($request->productTypeId)
+        );
+        $product->save();
+        return $product;
     }
 
     /**
@@ -82,13 +53,14 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $isUpdated = Product::find($id)->update([
-          'name' => $request->name,
-          'desc' => $request->desc,
-          'price' => $request->price
-        ]);
-        if($isUpdated) return 'success';
-        else return 'failed';
+        $product = Product::find($id);
+        $product->name = $request->name;
+        $product->desc = $request->desc;
+        $product->productType()->associate(
+            ProductType::find($request->productTypeId)
+        );
+        $product->save();
+        return $product;    
     }
 
     /**
@@ -100,5 +72,31 @@ class ProductController extends Controller
     public function destroy($id)
     {
         Product::destroy($id);
+        return 'success';
     }
+
+    public function getSizes($id)
+    {
+        return Product::find($id)->sizes()->get();
+    }
+
+    public function syncSizes(Request $request, $id)
+    {
+        $product = Product::find($id);
+        $product->sizes()->sync($request->sizes);
+        return $product->sizes()->get();
+    }
+
+    public function getColors($id)
+    {
+        return Product::find($id)->colors()->get();
+    }
+
+    public function syncColors(Request $request, $id)
+    {
+        $product = Product::find($id);
+        $product->colors()->sync($request->colors);
+        return $product->colors()->get();
+    }    
+
 }
